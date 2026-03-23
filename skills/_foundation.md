@@ -1,0 +1,83 @@
+# Pyramid Workflow — Foundation
+
+## What Pyramids Are
+
+A project using the pyramid workflow has a `./pyramids/` directory containing `.md` files that describe features, product requirements, and relationships between concepts at a **high level**. Pyramids are not code — they are conceptual documentation. Code is implementation detail; pyramids define the *contracts and relationships* between concepts.
+
+## Directory Structure
+
+- `./pyramids/index.md` — the broadest overview of the product, known as `root`
+- Nested concepts use **slug-formatted** names:
+  - **Directory form** (for concepts with children): `./pyramids/event-bus/index.md`
+  - **File form** (for small, self-contained concepts): `./pyramids/event-bus.md`
+- Nesting is recursive — deeper levels are more granular but remain high-level conceptual descriptions
+- Parent pyramids reference children using slug-formatted markers (e.g., `event-bus` in `index.md` refers to `./pyramids/event-bus/index.md` or `./pyramids/event-bus.md`)
+
+## Pyramid Identifiers
+
+Pyramids can be referenced anywhere using **dot-delimited identifiers**. These resolve to file paths:
+
+- `event-bus` → `./pyramids/event-bus/index.md` or `./pyramids/event-bus.md`
+- `event-bus.actions` → `./pyramids/event-bus/actions/index.md` or `./pyramids/event-bus/actions.md`
+- `root` → `./pyramids/index.md`
+- `root.event-bus.actions` → same as `event-bus.actions`
+
+`root` refers to `./pyramids/index.md` and is **optional** as a prefix — `root.event-bus.actions` and `event-bus.actions` mean the same thing. Use `root` explicitly only when you need to reference `./pyramids/index.md` itself.
+
+These identifiers are used in commands (`::audit event-bus.actions::`), in See Also references, and anywhere a pyramid needs to be referenced by name.
+
+## Content Rules
+
+- Pyramids describe **concepts**, not code
+- Code snippets are permitted only as abstract illustrations of a concept — never as prescriptive implementation
+- Real code does NOT need to match example code; it only needs to match the **concept**
+- If a concept can be explained without code, prefer that
+
+## Pyramid File Sections
+
+Every pyramid file should include these sections:
+
+### Purpose
+What the concept is and why it exists.
+
+### Concepts
+Key ideas and behaviors, described in plain language. Use abstract code only when it genuinely clarifies a concept that words alone cannot.
+
+### Contracts
+Behavioral guarantees and invariants that this concept upholds. These are what audits and reviews check against. Contracts define what must be true, not how it is achieved.
+
+### Relationships
+Explicit links to parent and child pyramids. Every pyramid **must** link to its parent, and the parent **must** reference it. A pyramid with no parent link is an **orphan** and will fail audits.
+
+Format:
+- Parent: `[Parent Name](../index.md)`
+- Children: `[Child Name](./child-slug/index.md)` or `[Child Name](./child-slug.md)`
+- See Also: `[Label](../sibling/path.md)` — cross-references to related pyramids that are not parent/child. Use dot-delimited identifiers to reference them (e.g., `event-bus.actions` resolves to `./pyramids/event-bus/actions/index.md` or `./pyramids/event-bus/actions.md`)
+
+### Constraints
+Boundaries and prohibitions — what this concept must NOT do or become. These guard against scope creep during implementation and audit.
+
+## Command Syntax
+
+Users issue pyramid commands in the format `::command context::` — two colons on each side. The first token is the command; everything after it is context, args, or info.
+
+## Change Flow
+
+All changes begin in the pyramids, never in the code directly. The pyramid workflow enforces this path:
+
+1. **Describe the change conceptually** — use `::new::` to create a pyramid or `::update::` to revise one
+2. **Verify alignment** — use `::audit::` to ensure the change fits the hierarchy
+3. **Implement or tighten** — use `::implement::` for new pyramids or `::tighten::` for revised ones
+
+`::implement::` and `::tighten::` are the **only** routes to code changes. Code must never be modified outside of these commands. If a user describes a change without specifying a pyramid, the appropriate pyramid must be identified first — ask the user to confirm before modifying anything.
+
+## Strictness Rules
+
+These rules apply across ALL pyramid operations. Violations are audit failures.
+
+1. **Pyramids are conceptual** — never treat them as code specifications. Code must match the concept, not any example syntax.
+2. **Scope is strict** — implementation must not exceed the bounds of the specified pyramid. No parent behavior. No child behavior. No undocumented behavior.
+3. **Links are mandatory** — every pyramid must be referenced by its parent. Every pyramid must reference its parent. Orphans fail audits.
+4. **Audits are strict** — do not pass audits when there is drift, missing links, or scope violations. Surface every issue.
+5. **Probing over assuming** — when drift or ambiguity is found, ask the user rather than making assumptions about intent.
+6. **Placeholder format** — for unbuilt dependencies: `// PRYS_TODO: ./pyramids/[path]` with meaningful runtime logging.

@@ -1,0 +1,13 @@
+{
+  "name": "zachbutton",
+  "owner": {
+    "name": "Zach Button"
+  },
+  "plugins": [
+    {
+      "name": "pyramid-workflow",
+      "source": "./",
+      "description": "Hierarchical conceptual documentation system for software development — pyramids define contracts and relationships between concepts, with commands to audit, review, implement, tighten, and create pyramids."
+    }
+  ]
+}
