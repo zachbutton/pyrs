@@ -209,6 +209,8 @@ Verifies conceptual alignment up the hierarchy.
 
 Every session starts cold. The pyramids are the memory.
 
+**In practice:** When something breaks that shouldn't have been possible, `::post-mortem::` traces the failure and patches the pyramid gap — a missing contract, an under-specified constraint, a cross-pyramid interaction nobody accounted for. Then a fresh agent runs `::tighten::` and independently fixes the bug it never saw, because the pyramid now describes the world correctly.
+
 ## Source Control
 
 The `./pyramids/` directory should be committed to version control alongside your code. Pyramid changes are changes — treat them like any other commit. The recommended convention is to use a `docs:` prefix for pyramid-only changes (e.g., `docs: add task-queue.retry pyramid`).
