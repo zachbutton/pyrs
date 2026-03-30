@@ -1,13 +1,13 @@
 {
-  "name": "zachbutton",
-  "owner": {
-    "name": "Zach Button"
-  },
-  "plugins": [
-    {
-      "name": "pyrs",
-      "source": "./",
-      "description": "Keeps AI coding agents aligned with your architecture across sessions. Pyramids define contracts and relationships between concepts — commands to create, implement, audit, review, and tighten them."
-    }
-  ]
+	"name": "zachbutton",
+	"owner": {
+		"name": "Zach Button"
+	},
+	"plugins": [
+		{
+			"name": "pyrs",
+			"source": "./",
+			"description": "Your context engineering doesn't survive the session. Pyrs gives AI agents persistent architectural contracts that do."
+		}
+	]
 }
