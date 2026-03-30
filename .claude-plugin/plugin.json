@@ -1,7 +1,7 @@
 {
 	"name": "pyrs",
-	"description": "Keeps AI coding agents aligned with your architecture across sessions. Pyramids define contracts and relationships between concepts — commands to create, implement, audit, review, and tighten them.",
-	"version": "0.1.4",
+	"description": "Your context engineering doesn't survive the session. Pyrs gives AI agents persistent architectural contracts that do.",
+	"version": "0.1.5",
 	"author": {
 		"name": "Zach Button"
 	}

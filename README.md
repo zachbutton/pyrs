@@ -8,9 +8,37 @@ An AI skill plugin for [Claude Code](https://claude.com/claude-code) and [OpenCo
 
 A structured contract layer that keeps AI coding agents aligned with your architecture as projects scale. Prevents scope creep, conceptual drift, and the silent architectural decay that happens when agents build without durable context.
 
+**Without Pyrs** — no matter how thorough your planning phase is, context doesn't survive the session:
+
+```mermaid
+graph TD
+    A1["Agent · Session 1"] --> C["Code"]
+    A2["Agent · Session 2"] --> C
+    A3["Agent · Session N"] --> C
+    C --> X["scope creep · drift · decay"]
+
+    style X fill:#e74c3c,stroke:#c0392b,color:#fff
+```
+
+**With Pyrs** — pyramids persist across sessions, drive tests, tests drive code:
+
+```mermaid
+graph TD
+    B1["Agent · Session 1"] --> P["Pyramids<br/><i>source of truth · persistent contracts</i>"]
+    B2["Agent · Session 2"] --> P
+    B3["Agent · Session N"] --> P
+    P --> T["Tests · derived from contracts"]
+    T --> C["Code · passes tests"]
+    C -.-> P
+
+    style P fill:#4a90d9,stroke:#2c5f8a,color:#fff
+    style T fill:#f5a623,stroke:#c4841c,color:#fff
+    style C fill:#7ed321,stroke:#5a9e18,color:#fff
+```
+
 Pyrs is a double acronym, one for what it does, and one for the artifact it produces: 
 
-**P**yramids **Y**ielding **R**eliable Software
+**P**yramids **Y**ielding **R**eliable Software  
 **P**yramidal **Y**ield-**R**eady **S**pecifications
 
 Created by [Zach Button](https://linkedin.com/in/zachbutton/)
