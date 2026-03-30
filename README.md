@@ -1,14 +1,58 @@
-# Pyrs
+# PYRS
 
 *Pronounced "pyres," short for pyramids.*
 
+**P**yramidal **Y**ield-**R**eady **S**pecifications
+
+```
+               ▲
+              ▲ ▲
+             ▲   ▲
+            ▲ ▲ ▲ ▲
+           ▲       ▲
+          ▲ ▲     ▲ ▲
+         ▲   ▲   ▲   ▲
+        ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲
+       ▲               ▲
+      ▲ ▲   P.Y.R.S   ▲ ▲
+     ▲   ▲           ▲   ▲
+    ▲ ▲ ▲ ▲         ▲ ▲ ▲ ▲
+   ▲       ▲       ▲       ▲
+  ▲ ▲     ▲ ▲     ▲ ▲     ▲ ▲
+ ▲   ▲   ▲   ▲   ▲   ▲   ▲   ▲
+▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲
+```
+
 An AI skill plugin for [Claude Code](https://claude.com/claude-code) and [OpenCode](https://opencode.ai) that introduces a structured, hierarchical approach to building software with LLM agents.
 
-## What is Pyrs?
+## Table of Contents
 
-A structured contract layer that keeps AI coding agents aligned with your architecture as projects scale. Prevents scope creep, conceptual drift, and the silent architectural decay that happens when agents build without durable context.
+- [What is PYRS?](#what-is-pyrs)
+- [The Problem](#the-problem)
+- [The Philosophy](#the-philosophy)
+- [How It Works](#how-it-works)
+  - [The Pyramid Directory](#the-pyramid-directory)
+  - [Pyramid File Structure](#pyramid-file-structure)
+  - [Pyramid Identifiers](#pyramid-identifiers)
+  - [Commands](#commands)
+  - [Placeholders](#placeholders)
+  - [The Audit Loop](#the-audit-loop)
+- [Example Walkthrough](#example-walkthrough)
+- [Bootstrapping an Existing Project](#bootstrapping-an-existing-project)
+- [Adoption Strategies](#adoption-strategies)
+  - [Full Coverage (new projects)](#full-coverage-new-projects)
+  - [Sparse Coverage (existing projects)](#sparse-coverage-existing-projects)
+  - [Meta Pyramid Repos (codebases you don't control)](#meta-pyramid-repos-codebases-you-dont-control)
+- [Source Control](#source-control)
+- [Installation](#installation)
+  - [Claude Code](#claude-code)
+  - [OpenCode](#opencode)
 
-**Without Pyrs** — no matter how thorough your planning phase is, context doesn't survive the session:
+## What is PYRS?
+
+Persistent context for AI coding agents. As you work with an agent, PYRS produces simple markdown files ("pyramids") that capture what your system does and why. These pyramids accumulate as a natural byproduct of the conversations you're already having. They're not documentation you maintain; they're artifacts that keep every future agent session aligned with your architecture.
+
+**Without PYRS** — no matter how thorough your planning phase is, context doesn't survive the session:
 
 ```mermaid
 graph TD
@@ -20,7 +64,7 @@ graph TD
     style X fill:#e74c3c,stroke:#c0392b,color:#fff
 ```
 
-**With Pyrs** — pyramids persist across sessions, drive tests, tests drive code:
+**With PYRS** — pyramids persist across sessions, drive tests, tests drive code:
 
 ```mermaid
 graph TD
@@ -36,9 +80,6 @@ graph TD
     style C fill:#7ed321,stroke:#5a9e18,color:#fff
 ```
 
-Pyrs is a double acronym, one for what it does, and one for the artifact it produces: 
-
-**P**yramids **Y**ielding **R**eliable Software  
 **P**yramidal **Y**ield-**R**eady **S**pecifications
 
 Created by [Zach Button](https://linkedin.com/in/zachbutton/)
@@ -59,13 +100,15 @@ Documentation helps, but traditional docs tend to either mirror the code (redund
 
 The pyramid workflow is built on a few core ideas:
 
-**Concepts, not code.** Pyramids describe *what* a system does and *why*, never *how*. They define contracts, relationships, and boundaries — not implementations. Code is free to change; concepts are stable. When a pyramid says "messages are delivered at-least-once," the implementation can use a queue, a database, a carrier pigeon — the pyramid doesn't care. It only cares that the contract holds.
+**Concepts, not code.** Pyramids describe *what* a system does and *why*, never *how*. They define contracts, relationships, and boundaries — not implementations. Code is free to change; concepts are stable. When a pyramid says "messages are delivered at-least-once," the implementation can use a queue, a database, a carrier pigeon. The pyramid doesn't care. It only cares that the contract holds.
 
-**Hierarchy mirrors decomposition.** Software is naturally hierarchical — systems decompose into subsystems, which decompose into components. Pyramids mirror this. The root is the broadest overview. Each level down gets more specific. A parent pyramid owns the contract of how its children relate to each other, while each child owns the contract of what it does internally. This means an agent implementing one piece can understand exactly its scope — and nothing more.
+**Hierarchy mirrors decomposition.** Software is naturally hierarchical: systems decompose into subsystems, which decompose into components. Pyramids mirror this. The root is the broadest overview. Each level down gets more specific. A parent pyramid owns the contract of how its children relate to each other, while each child owns the contract of what it does internally. This means an agent implementing one piece can understand exactly its scope — and nothing more.
 
-**Strict scoping prevents contamination.** When an agent implements pyramid P, it implements *only* P. Not the parent. Not the children. Not "helpful extras." If a child pyramid doesn't exist yet, the agent leaves an explicit placeholder and moves on. This is enforced — audits will catch scope violations. The result is that each piece of the system is built in isolation against a clear specification, and the specification itself is what ensures the pieces fit together.
+**The agent stays focused so you don't have to.** When an agent implements a pyramid, it builds *only* what the pyramid describes. Not the parent. Not the children. Not "helpful extras." If a dependency doesn't exist yet, the agent leaves a placeholder and moves on. You don't have to police scope; the pyramid does that for the agent.
 
-**Audits close the loop.** Pyramids aren't static documents that get written and forgotten. The workflow includes explicit audit and review commands that check pyramids against each other (conceptual alignment) and against the code (implementation alignment). Drift is caught, surfaced, and reconciled through conversation with the developer. The system stays honest over time.
+**You can check alignment anytime.** Pyramids aren't static documents that get written and forgotten. Quick audit and review commands let you check how pyramids relate to each other and whether the code still matches. When drift is found, it's surfaced for you to decide what to do. The agent asks, it doesn't assume.
+
+**Commands are just natural language.** The `::command::` syntax tells the plugin which strategy to load, but everything inside is conversational. Describe what you want in plain English. There's nothing to memorize; `::help::` shows the full list.
 
 **The developer stays in control.** Pyramid commands don't silently make sweeping changes. When drift is found, the agent asks probing questions. When a new pyramid doesn't fit cleanly into the hierarchy, the agent surfaces the tension and asks how to resolve it. The workflow is opinionated about structure but collaborative about decisions.
 
@@ -73,7 +116,7 @@ The pyramid workflow is built on a few core ideas:
 
 ### The Pyramid Directory
 
-A project using the pyramid workflow has a `./pyramids/` directory at its root. This directory contains `.md` files organized in a hierarchy that mirrors the conceptual structure of the product:
+PYRS stores pyramids in a `./pyramids/` directory at the project root. These are plain markdown files organized in a hierarchy that mirrors the conceptual structure of the product:
 
 ```
 pyramids/
@@ -89,8 +132,8 @@ pyramids/
 - `./pyramids/index.md` is the root — the broadest overview of what the product is and what its major pieces are
 - Concepts with children get a directory with an `index.md` (e.g., `./pyramids/auth/index.md`)
 - Small, self-contained concepts get a single file (e.g., `./pyramids/event-bus.md`)
-- Nesting is recursive — deeper levels are more granular, but every level remains high-level and conceptual
-- Parent pyramids reference their children, and children reference their parent — orphans (unreferenced pyramids) are treated as errors
+- Nesting is recursive; deeper levels are more granular, but every level remains high-level and conceptual
+- Parent pyramids reference their children, and children reference their parent. The plugin keeps these links consistent
 
 ### Pyramid File Structure
 
@@ -119,7 +162,7 @@ Commands reference pyramids using dot-delimited identifiers that resolve to file
 
 ### Commands
 
-Commands are issued in conversation using `::command context::` syntax (two colons on each side). `P` is a pyramid identifier in dot notation (e.g., `task-queue.retry`). `P?` means the identifier is optional.
+Commands are issued in conversation using `::command context::` syntax (two colons on each side). Each command loads a specific strategy; the agent handles the rest. `P` is a pyramid identifier in dot notation (e.g., `task-queue.retry`). `P?` means the identifier is optional.
 
 | Command | What it does |
 |---------|-------------|
@@ -131,14 +174,15 @@ Commands are issued in conversation using `::command context::` syntax (two colo
 | `::review P::` | Compare actual code against the pyramid(s) it should mirror — P can also be a code path (e.g., `src/queue/`) |
 | `::survey P::` | Analyze P and its full lineage (ancestors + descendants) for structural gaps and missing leaves |
 | `::post-mortem P? [...description]::` | Debug an issue that should have been impossible given the pyramids, then patch the gap |
+| `::bootstrap P? [...description]::` | Produce pyramids from existing code — the one exception to pyramid-first |
 | `::ls::` | List the pyramid hierarchy as a tree; `::ls describe::` to include descriptions |
 | `::help::` | Show the command reference |
 
-If you describe a code change without using a `::` command, the plugin will intercept and guide you into the pyramid workflow — changes always flow through pyramids.
+If you describe a code change without using a `::` command, the plugin will gently redirect you into the pyramid workflow. It'll help you figure out which pyramid to create or update first.
 
 ### Placeholders
 
-When `::implement::` or `::tighten::` encounters an unbuilt dependency — whether a child pyramid or a sibling referenced via See Also — it leaves an explicit placeholder in the code: `// PRYS_TODO: ./pyramids/[path]`. These placeholders include meaningful runtime logging so missing pieces are visible during execution, not silently absent. Once the dependency is created and implemented, the placeholder gets replaced.
+When `::implement::` or `::tighten::` encounters an unbuilt dependency — whether a child pyramid or a sibling referenced via See Also — it leaves an explicit placeholder in the code: `// PYRS_TODO: ./pyramids/[path]`. These placeholders include meaningful runtime logging so missing pieces are visible during execution, not silently absent. Once the dependency is created and implemented, the placeholder gets replaced.
 
 ### The Audit Loop
 
@@ -153,7 +197,7 @@ This loop keeps the system aligned at every level — from high-level product vi
 
 ## Example Walkthrough
 
-Here's how the pyramid workflow plays out across a real project. Each step below happens in a **fresh session** — separate conversation, different day, even a different agent. The pyramid is the durable context.
+Here's how the pyramid workflow plays out across a real project. Each step below happens in a **fresh session** — separate conversation, different day, even a different agent. Notice that every interaction is a one-liner; the agent does the heavy lifting.
 
 ---
 
@@ -175,7 +219,7 @@ The agent asks where this fits in the hierarchy, you discuss scope and contracts
 ::implement task-queue::
 ```
 
-The agent reads `task-queue.md` — that's all it needs. It builds the implementation via incremental TDD. Child concepts referenced but not yet defined get `// PRYS_TODO` placeholders with runtime logging.
+The agent reads `task-queue.md`. That's all it needs. It builds the implementation via incremental TDD. Child concepts referenced but not yet defined get `// PYRS_TODO` placeholders with runtime logging.
 
 ---
 
@@ -195,7 +239,7 @@ The agent creates `./pyramids/task-queue/retry.md` as a child pyramid and update
 ::implement task-queue.retry::
 ```
 
-The agent reads `retry.md`, implements via TDD, and replaces the `PRYS_TODO` placeholder left in Session 2.
+The agent reads `retry.md`, implements via TDD, and replaces the `PYRS_TODO` placeholder left in Session 2.
 
 ---
 
@@ -237,11 +281,49 @@ Verifies conceptual alignment up the hierarchy.
 
 Every session starts cold. The pyramids are the memory.
 
-**In practice:** When something breaks that shouldn't have been possible, `::post-mortem::` traces the failure and patches the pyramid gap — a missing contract, an under-specified constraint, a cross-pyramid interaction nobody accounted for. Then a fresh agent runs `::tighten::` and independently fixes the bug it never saw, because the pyramid now describes the world correctly.
+**In practice:** When something breaks that shouldn't have been possible, `::post-mortem::` traces the failure and patches the pyramid gap: a missing contract, an under-specified constraint, a cross-pyramid interaction nobody accounted for. Then a fresh agent runs `::tighten::` and independently fixes the bug it never saw, because the pyramid now describes the world correctly.
+
+## Bootstrapping an Existing Project
+
+If you have an existing codebase and want to adopt PYRS, `::bootstrap::` reverses the normal flow — it reads code and produces pyramids. This is the **one exception** to the pyramid-first rule.
+
+```
+::bootstrap::
+```
+
+The agent surveys your codebase, proposes a pyramid hierarchy, and, after your confirmation, writes the pyramids top-down. Each pyramid is conceptual, not a code description. Once bootstrap is complete, the normal workflow applies: all future changes flow through pyramids.
+
+You can also bootstrap a specific area:
+
+```
+::bootstrap auth — focus on session handling and OAuth::
+```
+
+Or use it after writing code manually. Bootstrap captures the concept so the pyramid artifact exists for future agents:
+
+```
+::bootstrap task-queue.retry::
+```
+
+## Adoption Strategies
+
+### Full Coverage (new projects)
+
+When starting a project from scratch, pyramids grow naturally alongside the code. `::new::` before `::implement::` becomes the natural rhythm: you describe what you want, the agent writes the pyramid, then builds the code. The pyramids are artifacts of conversations you're already having, not extra work.
+
+### Sparse Coverage (existing projects)
+
+You don't need to bootstrap your entire codebase. Even a handful of pyramids covering your most drift-prone areas prevents the worst architectural decay. Add them incrementally as you touch areas. `::bootstrap::` what matters, leave the rest. A sparse set of pyramids still gives agents meaningful guardrails in the areas that count.
+
+### Meta Pyramid Repos (codebases you don't control)
+
+If your projects live in `~/code/*`, you can make `~/code/` itself a private repo with its own `./pyramids/` directory. The pyramids describe concepts across multiple codebases — sparse by nature, growing with your understanding of the systems.
+
+This is especially useful at work when your company doesn't use PYRS. Your agents still get durable context across sessions, and as a side effect, `./pyramids/` accumulates tribal knowledge: how systems connect, why things are the way they are, what the gotchas are. That knowledge lives in portable markdown files you can share with your team anytime.
 
 ## Source Control
 
-The `./pyramids/` directory should be committed to version control alongside your code. Pyramid changes are changes — treat them like any other commit. The recommended convention is to use a `docs:` prefix for pyramid-only changes (e.g., `docs: add task-queue.retry pyramid`).
+The `./pyramids/` directory should be committed to version control alongside your code. Pyramid changes are changes — treat them like any other commit. The recommended convention is to use a `docs:` prefix for pyramid-only changes (e.g., `docs: add task-queue.retry pyramid`). The same applies to meta pyramid repos: commit pyramids alongside whatever they describe.
 
 ## Installation
 
@@ -256,21 +338,18 @@ From within Claude Code:
 
 ### OpenCode
 
-Clone the repo and symlink the skills into your OpenCode skills path:
+Clone the repo and add the skills path to your OpenCode config (`.opencode.json` in your project or `~/.config/opencode/config.json`):
 
 ```sh
 git clone https://github.com/zachbutton/pyrs.git ~/.local/share/pyrs
-
-# Symlink each skill
-for skill in ~/.local/share/pyrs/skills/pyrs-*/; do
-  ln -s "$skill" ~/.config/opencode/skills/$(basename "$skill")
-done
 ```
 
-Or use the Claude-compatible skills path if you prefer:
-
-```sh
-for skill in ~/.local/share/pyrs/skills/pyrs-*/; do
-  ln -s "$skill" ~/.claude/skills/$(basename "$skill")
-done
+```json
+{
+  "options": {
+    "skills_paths": ["~/.local/share/pyrs/skills"]
+  }
+}
 ```
+
+Skills are loaded on demand, not all at once. OpenCode scans the path for `SKILL.md` files and only reads a skill's full instructions when a task matches its description.
