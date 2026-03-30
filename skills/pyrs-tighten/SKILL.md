@@ -1,5 +1,5 @@
 ---
-name: pyramid-tighten
+name: pyrs-tighten
 description: "Tighten an existing implementation against an updated pyramid using test-driven development. Triggered by ::tighten P:: where P is a pyramid identifier."
 ---
 
@@ -13,7 +13,7 @@ Use this when a pyramid has been revised and the existing implementation needs t
 
 ## Procedure
 
-1. **Resolve P** — locate the pyramid file at `./pyramids/P.md` or `./pyramids/P/index.md`
+1. **Resolve P** — resolve the dot-delimited identifier to its pyramid file (see Pyramid Identifiers in _foundation.md)
 2. **Read the updated pyramid P** — understand what changed in Purpose, Concepts, Contracts, Relationships, and Constraints
 3. **Read the existing code and tests** — understand what currently exists
 4. **Identify the delta** — what does the updated pyramid require that the current code doesn't satisfy? What does the current code do that the updated pyramid no longer describes?
@@ -41,4 +41,4 @@ After tightening, your code will be audited against the updated P. Auditors will
 - That every contract in the updated P is upheld
 - That code removed or changed reflects the pyramid's revisions
 - That no scope creep was introduced during tightening
-- That `PRYS_TODO` placeholders are accurate for the current state of children
+- That `PRYS_TODO` placeholders are accurate for the current state of children and See Also dependencies

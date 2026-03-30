@@ -1,5 +1,5 @@
 ---
-name: pyramid-post-mortem
+name: pyrs-post-mortem
 description: "Investigate an issue that should have been impossible given the pyramids, debug it, and patch the relevant pyramid(s) to prevent recurrence. Triggered by ::post-mortem [description]::"
 ---
 

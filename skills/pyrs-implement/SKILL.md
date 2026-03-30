@@ -1,5 +1,5 @@
 ---
-name: pyramid-implement
+name: pyrs-implement
 description: "Implement the concept described by a pyramid using test-driven development. Triggered by ::implement P:: where P is a pyramid identifier."
 ---
 
@@ -11,7 +11,7 @@ This skill is activated when the user issues `::implement P::` where P is a pyra
 
 ## Procedure
 
-1. **Resolve P** — locate the pyramid file at `./pyramids/P.md` or `./pyramids/P/index.md`
+1. **Resolve P** — resolve the dot-delimited identifier to its pyramid file (see Pyramid Identifiers in _foundation.md)
 2. **Read P thoroughly** — understand its Purpose, Concepts, Contracts, Relationships, and Constraints
 3. **Detect the project's test framework** — use whatever testing tools the project already has
 4. **Implement using strict TDD red/green, incrementally:**
@@ -36,11 +36,12 @@ These will be enforced by future audits and reviews. Violations are failures.
 
 ## Unbuilt Dependencies
 
-When P references children that are not yet built or complete:
+When P references children or See Also siblings that are not yet built or complete:
 
 - Leave an explicit placeholder comment in the code: `// PRYS_TODO: ./pyramids/[pyramid file or directory]`
 - Log the not-implemented behavior meaningfully at runtime so the developer can see it during execution
-- Do **NOT** implement the child's behavior — only leave the placeholder
+- Do **NOT** implement the dependency's behavior — only leave the placeholder
+- This applies to both child pyramids and sibling concepts referenced via See Also in P's Relationships
 
 ## Audit Awareness
 
@@ -48,6 +49,6 @@ Your implementation will be audited against P. Auditors will check:
 - That every contract in P is upheld by your code
 - That your code does not exceed P's scope
 - That relationships and constraints are respected
-- That `PRYS_TODO` placeholders exist for unbuilt children
+- That `PRYS_TODO` placeholders exist for unbuilt children and unbuilt See Also dependencies
 
 Write code that cleanly maps to P's concepts. When an auditor reads P and then your code, the alignment should be obvious.

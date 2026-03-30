@@ -1,5 +1,5 @@
 ---
-name: pyramid-ls
+name: pyrs-ls
 description: "List the pyramid hierarchy as a tree. Triggered by ::ls:: for structure only, or ::ls describe:: / ::ls d:: to include short descriptions."
 ---
 

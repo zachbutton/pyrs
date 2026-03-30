@@ -5,9 +5,9 @@
   },
   "plugins": [
     {
-      "name": "pyramid-workflow",
+      "name": "pyrs",
       "source": "./",
-      "description": "Hierarchical conceptual documentation system for software development — pyramids define contracts and relationships between concepts, with commands to audit, review, implement, tighten, and create pyramids."
+      "description": "Keeps AI coding agents aligned with your architecture across sessions. Pyramids define contracts and relationships between concepts — commands to create, implement, audit, review, and tighten them."
     }
   ]
 }

@@ -1,5 +1,5 @@
 ---
-name: pyramid-change
+name: pyrs-change
 description: "Intercepts when a user describes a code change, feature, or bug fix without using a :: command. Guides them into the pyramid workflow instead of modifying code directly."
 ---
 

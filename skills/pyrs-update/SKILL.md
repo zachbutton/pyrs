@@ -1,5 +1,5 @@
 ---
-name: pyramid-update
+name: pyrs-update
 description: "Update an existing pyramid based on new information or changed requirements. Triggered by ::update P [description]:: where P is a pyramid identifier."
 ---
 
@@ -13,7 +13,7 @@ This skill is activated when the user issues `::update P description::` where P 
 
 ### Step 1: Read the Current State
 
-1. **Resolve P** — locate the pyramid file at `./pyramids/P.md` or `./pyramids/P/index.md`
+1. **Resolve P** — resolve the dot-delimited identifier to its pyramid file (see Pyramid Identifiers in _foundation.md)
 2. **Read P thoroughly** — understand its current Purpose, Concepts, Contracts, Relationships, and Constraints
 3. **Read parent pyramid(s)** — understand how P fits in the hierarchy today
 

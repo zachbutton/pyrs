@@ -1,8 +1,8 @@
 {
-	"name": "pyramid-workflow",
-	"description": "Hierarchical conceptual documentation system for software development — pyramids define contracts and relationships between concepts, with commands to audit, review, implement, tighten, and create pyramids.",
-	"version": "0.1.3",
+	"name": "pyrs",
+	"description": "Keeps AI coding agents aligned with your architecture across sessions. Pyramids define contracts and relationships between concepts — commands to create, implement, audit, review, and tighten them.",
+	"version": "0.1.4",
 	"author": {
-		"name": "Zach"
+		"name": "Zach Button"
 	}
 }

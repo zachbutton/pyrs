@@ -1,5 +1,5 @@
 ---
-name: pyramid-new
+name: pyrs-new
 description: "Create a new pyramid from a description or reference. Triggered by ::new description:: where the description explains the new concept."
 ---
 
@@ -48,6 +48,10 @@ Place the file at:
 
 Add a reference to the new pyramid in the parent's Relationships section. This is **mandatory** — a pyramid without a parent link is an orphan and will fail audits.
 
-### Step 5: Update Code Placeholders
+### Step 5: Check for See Also Cross-References
+
+Read sibling pyramids (other children of the same parent) and check whether any are conceptually related to the new pyramid. If so, suggest adding See Also links in both directions — on the new pyramid and on the existing sibling. Ask the user before modifying existing pyramids.
+
+### Step 6: Update Code Placeholders
 
 If `PRYS_TODO` placeholders referencing this concept exist in the codebase, note them for the user. The placeholders should remain until `::implement::` is run for this pyramid, but the user should know they exist.

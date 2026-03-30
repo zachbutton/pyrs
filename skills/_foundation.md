@@ -80,4 +80,4 @@ These rules apply across ALL pyramid operations. Violations are audit failures.
 3. **Links are mandatory** — every pyramid must be referenced by its parent. Every pyramid must reference its parent. Orphans fail audits.
 4. **Audits are strict** — do not pass audits when there is drift, missing links, or scope violations. Surface every issue.
 5. **Probing over assuming** — when drift or ambiguity is found, ask the user rather than making assumptions about intent.
-6. **Placeholder format** — for unbuilt dependencies: `// PRYS_TODO: ./pyramids/[path]` with meaningful runtime logging.
+6. **Placeholder format** — for unbuilt dependencies (children or See Also siblings): `// PRYS_TODO: ./pyramids/[path]` with meaningful runtime logging.

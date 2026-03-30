@@ -1,5 +1,5 @@
 ---
-name: pyramid-review
+name: pyrs-review
 description: "Review code against the pyramid(s) it should mirror. Triggered by ::review P:: where P is a pyramid identifier or code reference."
 ---
 
@@ -11,7 +11,7 @@ This skill is activated when the user issues `::review P::` where P is a pyramid
 
 ## Procedure
 
-1. **Resolve the pyramid** — if P is a pyramid identifier, locate it at `./pyramids/P.md` or `./pyramids/P/index.md`. If P is a code path, determine which pyramid(s) govern that code.
+1. **Resolve the pyramid** — if P is a pyramid identifier, resolve the dot-delimited identifier to its pyramid file (see Pyramid Identifiers in _foundation.md). If P is a code path, determine which pyramid(s) govern that code.
 2. **Read the pyramid(s)** — understand Purpose, Concepts, Contracts, Relationships, and Constraints
 3. **Read relevant parent and child pyramids** for broader context
 4. **Read the corresponding code** — understand what it actually does and implies

@@ -1,5 +1,5 @@
 ---
-name: pyramid-audit
+name: pyrs-audit
 description: "Audit a pyramid for conceptual alignment within the hierarchy. Triggered by ::audit P:: where P is a pyramid identifier."
 ---
 
@@ -11,7 +11,7 @@ This skill is activated when the user issues `::audit P::` where P is a pyramid 
 
 ## Procedure
 
-1. **Resolve P** — locate the pyramid file at `./pyramids/P.md` or `./pyramids/P/index.md`
+1. **Resolve P** — resolve the dot-delimited identifier to its pyramid file (see Pyramid Identifiers in _foundation.md)
 2. **Read P** thoroughly — understand its Purpose, Concepts, Contracts, Relationships, and Constraints
 3. **Traverse upward** — read all parent pyramids from P up to `./pyramids/index.md`
 4. **Consider the broad ecosystem** — understand how P fits within the full hierarchy
