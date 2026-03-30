@@ -16,7 +16,7 @@ Use this when a pyramid has been revised and the existing implementation needs t
 1. **Resolve P** — resolve the dot-delimited identifier to its pyramid file (see Pyramid Identifiers in _foundation.md)
 2. **Read the updated pyramid P** — understand what changed in Purpose, Concepts, Contracts, Relationships, and Constraints
 3. **Read the existing code and tests** — understand what currently exists
-4. **Identify the delta** — what does the updated pyramid require that the current code doesn't satisfy? What does the current code do that the updated pyramid no longer describes?
+4. **Compare pyramid against code** — read the pyramid as a complete specification. Anything the pyramid describes that the code doesn't do is missing. Anything the code does that the pyramid doesn't describe is excess. Both are gaps to close.
 5. **Tighten using strict TDD red/green, incrementally:**
    - Pick one changed aspect
    - Write or update a test to reflect the **updated** pyramid's concept

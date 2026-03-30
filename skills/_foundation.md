@@ -81,3 +81,4 @@ These rules apply across ALL pyramid operations. Violations are audit failures.
 4. **Audits are strict** — do not pass audits when there is drift, missing links, or scope violations. Surface every issue.
 5. **Probing over assuming** — when drift or ambiguity is found, ask the user rather than making assumptions about intent.
 6. **Placeholder format** — for unbuilt dependencies (children or See Also siblings): `// PRYS_TODO: ./pyramids/[path]` with meaningful runtime logging.
+7. **Git history is not a source of truth** — pyramid operations compare the current pyramid state against the current code state. Do not use `git log`, `git diff`, `git blame`, or any version control history to determine what a pyramid means, what changed, or what to implement. The pyramid file as it exists now is the complete specification.
