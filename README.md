@@ -1,27 +1,12 @@
+<div align="center">
+  <img src="assets/logo.svg" alt="PYRS logo — Sierpiński triangle" width="400">
+</div>
+
 # PYRS
 
 *Pronounced "pyres," short for pyramids.*
 
 **P**yramidal **Y**ield-**R**eady **S**pecifications
-
-```
-               ▲
-              ▲ ▲
-             ▲   ▲
-            ▲ ▲ ▲ ▲
-           ▲       ▲
-          ▲ ▲     ▲ ▲
-         ▲   ▲   ▲   ▲
-        ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲
-       ▲               ▲
-      ▲ ▲   P.Y.R.S   ▲ ▲
-     ▲   ▲           ▲   ▲
-    ▲ ▲ ▲ ▲         ▲ ▲ ▲ ▲
-   ▲       ▲       ▲       ▲
-  ▲ ▲     ▲ ▲     ▲ ▲     ▲ ▲
- ▲   ▲   ▲   ▲   ▲   ▲   ▲   ▲
-▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲
-```
 
 An AI skill plugin for [Claude Code](https://claude.com/claude-code) and [OpenCode](https://opencode.ai) that introduces a structured, hierarchical approach to building software with LLM agents.
 
