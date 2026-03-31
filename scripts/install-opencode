@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SKILLS_PATH="$(cd "$(dirname "$0")/skills" && pwd)"
+SKILLS_PATH="$(cd "$(dirname "$0")/../skills" && pwd)"
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
 CONFIG_FILE="$CONFIG_DIR/config.json"
 
