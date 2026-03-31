@@ -13,6 +13,9 @@ An AI skill plugin for [Claude Code](https://claude.com/claude-code) and [OpenCo
 ## Table of Contents
 
 - [What is PYRS?](#what-is-pyrs)
+- [Installation](#installation)
+  - [Claude Code](#claude-code)
+  - [OpenCode](#opencode)
 - [The Problem](#the-problem)
 - [The Philosophy](#the-philosophy)
 - [How It Works](#how-it-works)
@@ -29,9 +32,6 @@ An AI skill plugin for [Claude Code](https://claude.com/claude-code) and [OpenCo
   - [Sparse Coverage (existing projects)](#sparse-coverage-existing-projects)
   - [Meta Pyramid Repos (codebases you don't control)](#meta-pyramid-repos-codebases-you-dont-control)
 - [Source Control](#source-control)
-- [Installation](#installation)
-  - [Claude Code](#claude-code)
-  - [OpenCode](#opencode)
 
 ## What is PYRS?
 
@@ -68,6 +68,38 @@ graph TD
 **P**yramidal **Y**ield-**R**eady **S**pecifications
 
 Created by [Zach Button](https://linkedin.com/in/zachbutton/)
+
+## Installation
+
+### Claude Code
+
+From within Claude Code:
+
+```
+/plugin marketplace add zachbutton/pyrs
+/plugin install pyrs@zachbutton-pyrs
+```
+
+### OpenCode
+
+Clone the repo and run the install script. It adds the skills path to your OpenCode config at `~/.config/opencode/config.json`, merging with any existing settings:
+
+```sh
+git clone https://github.com/zachbutton/pyrs.git ~/.local/share/pyrs
+~/.local/share/pyrs/scripts/install-opencode
+```
+
+Or manually add the skills path to your OpenCode config (`opencode.json` in your project root or `~/.config/opencode/config.json`):
+
+```json
+{
+  "skills": {
+    "paths": ["~/.local/share/pyrs/skills"]
+  }
+}
+```
+
+Skills are loaded on demand, not all at once. OpenCode scans the path for `SKILL.md` files and only reads a skill's full instructions when a task matches its description.
 
 ## The Problem
 
@@ -310,34 +342,3 @@ This is especially useful at work when your company doesn't use PYRS. Your agent
 
 The `./pyramids/` directory should be committed to version control alongside your code. Pyramid changes are changes — treat them like any other commit. The recommended convention is to use a `docs:` prefix for pyramid-only changes (e.g., `docs: add task-queue.retry pyramid`). The same applies to meta pyramid repos: commit pyramids alongside whatever they describe.
 
-## Installation
-
-### Claude Code
-
-From within Claude Code:
-
-```
-/plugin marketplace add zachbutton/pyrs
-/plugin install pyrs@zachbutton-pyrs
-```
-
-### OpenCode
-
-Clone the repo and run the install script. It adds the skills path to your OpenCode config at `~/.config/opencode/config.json`, merging with any existing settings:
-
-```sh
-git clone https://github.com/zachbutton/pyrs.git ~/.local/share/pyrs
-~/.local/share/pyrs/scripts/install-opencode
-```
-
-Or manually add the skills path to your OpenCode config (`opencode.json` in your project root or `~/.config/opencode/config.json`):
-
-```json
-{
-  "skills": {
-    "paths": ["~/.local/share/pyrs/skills"]
-  }
-}
-```
-
-Skills are loaded on demand, not all at once. OpenCode scans the path for `SKILL.md` files and only reads a skill's full instructions when a task matches its description.
