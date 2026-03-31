@@ -71,6 +71,8 @@ All changes begin in the pyramids, never in the code directly. The pyramid workf
 
 `::implement::` and `::tighten::` are the **only** routes to code changes. Code must never be modified outside of these commands. If a user describes a change without specifying a pyramid, the appropriate pyramid must be identified first — ask the user to confirm before modifying anything.
 
+**Exception: `::bootstrap::`** — when adopting pyrs on an existing project or capturing pyramids for code a human wrote, `::bootstrap::` reverses the flow: it reads code and produces pyramids. This is the only time code drives pyramid creation. Once bootstrap completes, the normal pyramid-first flow applies to all future changes.
+
 ## Strictness Rules
 
 These rules apply across ALL pyramid operations. Violations are audit failures.
