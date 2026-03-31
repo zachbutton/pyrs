@@ -323,16 +323,19 @@ From within Claude Code:
 
 ### OpenCode
 
-Clone the repo and add the skills path to your OpenCode config (`.opencode.json` in your project or `~/.config/opencode/config.json`):
+Clone the repo and run the install script. It adds the skills path to your OpenCode config at `~/.config/opencode/config.json`, merging with any existing settings:
 
 ```sh
 git clone https://github.com/zachbutton/pyrs.git ~/.local/share/pyrs
+~/.local/share/pyrs/scripts/install-opencode
 ```
+
+Or manually add the skills path to your OpenCode config (`opencode.json` in your project root or `~/.config/opencode/config.json`):
 
 ```json
 {
-  "options": {
-    "skills_paths": ["~/.local/share/pyrs/skills"]
+  "skills": {
+    "paths": ["~/.local/share/pyrs/skills"]
   }
 }
 ```

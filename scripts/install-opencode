@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SKILLS_PATH="$(cd "$(dirname "$0")/skills" && pwd)"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
+CONFIG_FILE="$CONFIG_DIR/config.json"
+
+mkdir -p "$CONFIG_DIR"
+
+existing=$(cat "$CONFIG_FILE" 2>/dev/null || echo '{}')
+
+echo "$existing" | jq \
+  --arg path "$SKILLS_PATH" \
+  '. * {skills: {paths: ((.skills.paths // []) + [$path] | unique)}}' \
+  > "$CONFIG_FILE.tmp" && mv "$CONFIG_FILE.tmp" "$CONFIG_FILE"
+
+echo "Added $SKILLS_PATH to $CONFIG_FILE"
