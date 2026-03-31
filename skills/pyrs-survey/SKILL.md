@@ -26,6 +26,7 @@ This skill is activated when the user issues `::survey P::` where P is a pyramid
    - Why it matters (what could go wrong without it)
    - A suggested pyramid name and where it would fit in the hierarchy
 7. **Ask the user** which gaps they want to address — do not create pyramids without confirmation
+8. **Hand off to the change flow** — once the user decides which gaps to address, route them to the appropriate command (`::new::` for missing pyramids, `::update::` for under-specified ones). Do **NOT** create or modify pyramids directly — the survey command surfaces gaps and connects the user to the right command, nothing more.
 
 ## Guidelines
 

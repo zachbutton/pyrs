@@ -1,15 +1,24 @@
 ---
 name: pyrs-update
-description: "Update an existing pyramid based on new information or changed requirements. Triggered by ::update P [description]:: where P is a pyramid identifier."
+description: "Update an existing pyramid based on new information or changed requirements. Triggered by ::update P? [description]:: where P optionally targets a specific pyramid."
 ---
 
 Before proceeding, read [_foundation.md](../_foundation.md) for the pyramid system rules.
 
 # Pyramid Update
 
-This skill is activated when the user issues `::update P description::` where P is an existing pyramid identifier and the description explains what needs to change (e.g., `::update event-bus — channels should support priority ordering::`).
+This skill is activated when the user issues `::update P? [...description]::` where P is an existing pyramid identifier and the description explains what needs to change (e.g., `::update event-bus — channels should support priority ordering::`).
 
 ## Procedure
+
+### Step 0: Resolve P (if omitted)
+
+If the user did not specify a pyramid identifier, do NOT guess. Instead:
+1. Read the user's description to understand what area of the system they want to change
+2. Search `./pyramids/` for pyramids that likely govern that area
+3. Present the candidate pyramid(s) and ask the user to confirm which one to update
+
+Do not proceed until P is resolved.
 
 ### Step 1: Read the Current State
 

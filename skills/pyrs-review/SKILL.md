@@ -20,10 +20,11 @@ This skill is activated when the user issues `::review P::` where P is a pyramid
    - Does the pyramid describe contracts the code doesn't uphold?
    - Does the code imply relationships or dependencies not captured in the pyramid hierarchy?
    - Are there `PYRS_TODO` placeholders that should have been resolved?
-6. **Report findings** — when drift is found, **ask probing questions** about how to reconcile:
+6. **Report findings with evidence** — when drift is found, cite specific pyramids, sections, or code locations. Do not give vague summaries. Then **ask probing questions** about how to reconcile:
    - Update the code to match the pyramid?
    - Update the pyramid to match the code?
    - Both need revision?
+7. **Hand off to the change flow** — once the user decides, route them to the appropriate command (`::update::` for pyramid changes, `::tighten::` for code changes). Do **NOT** perform the resolution directly — the review command surfaces problems and connects the user to the right command, nothing more.
 
 ## What Drift Looks Like
 

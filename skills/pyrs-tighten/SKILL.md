@@ -35,6 +35,16 @@ Same strict scope rules as `::implement::`:
 - Do **NOT** add anything not explicitly in the updated P
 - Remove code that the updated pyramid no longer describes (it would fail audit as scope creep)
 
+## Unbuilt Dependencies
+
+When tightening reveals new unbuilt dependencies (children or See Also siblings that are not yet built or complete):
+
+- Leave an explicit placeholder comment in the code: `// PYRS_TODO: ./pyramids/[pyramid file or directory]`
+- Log the not-implemented behavior meaningfully at runtime so the developer can see it during execution
+- Do **NOT** implement the dependency's behavior — only leave the placeholder
+- Update or remove stale placeholders for dependencies that have since been built
+- **Exception:** if P (or any of its ancestors) has a Constraint prohibiting code markers, do not insert `PYRS_TODO` placeholders — instead, note unbuilt dependencies in the pyramid itself
+
 ## Provenance Comments
 
 Maintain `// PYRS: P` comments (using P's dot-delimited identifier) on code and tests touched during tightening. Use the comment syntax appropriate for the language (`#`, `//`, `/* */`, etc.).

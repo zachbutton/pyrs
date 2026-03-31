@@ -2,7 +2,7 @@
 
 ## What Pyramids Are
 
-A project using the pyramid workflow has a `./pyramids/` directory containing `.md` files that describe features, product requirements, and relationships between concepts at a **high level**. Pyramids are not code — they are conceptual documentation. Code is implementation detail; pyramids define the *contracts and relationships* between concepts.
+A project using the pyramid workflow has a `./pyramids/` directory containing `.md` files that describe features, product requirements, and relationships between concepts at a **high level**. Pyramids are not code — they are operational artifacts that drive implementation and verification. Code is implementation detail; pyramids define the *contracts and relationships* between concepts and serve as the source of truth that precedes code.
 
 ## Directory Structure
 
@@ -68,6 +68,9 @@ All changes begin in the pyramids, never in the code directly. The pyramid workf
 1. **Describe the change conceptually** — use `::new::` to create a pyramid or `::update::` to revise one
 2. **Verify alignment** — use `::audit::` to ensure the change fits the hierarchy
 3. **Implement or tighten** — use `::implement::` for new pyramids or `::tighten::` for revised ones
+4. **Review for drift** — use `::review::` to verify the code matches the pyramid
+
+This loop runs continuously across sessions.
 
 `::implement::` and `::tighten::` are the **only** routes to code changes. Code must never be modified outside of these commands. If a user describes a change without specifying a pyramid, the appropriate pyramid must be identified first — ask the user to confirm before modifying anything.
 

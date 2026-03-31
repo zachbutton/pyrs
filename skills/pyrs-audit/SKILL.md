@@ -21,10 +21,11 @@ This skill is activated when the user issues `::audit P::` where P is a pyramid 
    - Are all child references in parents present and accurate?
    - Are there orphan pyramids (missing parent links)?
    - Do constraints conflict across levels?
-6. **Report findings** — when drift is found, **ask probing questions** about how the user wants to reconcile:
+6. **Report findings with evidence** — when drift is found, cite specific pyramids, sections, or code locations. Do not give vague summaries. Then **ask probing questions** about how the user wants to reconcile:
    - Update P?
    - Update one or more parents?
    - Both?
+7. **Hand off to the change flow** — once the user decides, route them to the appropriate command (`::update::` for pyramid changes, `::tighten::` for code changes, `::new::` for missing pyramids). Do **NOT** perform the resolution directly — the audit command surfaces problems and connects the user to the right command, nothing more.
 
 ## Strictness
 
