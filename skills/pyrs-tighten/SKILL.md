@@ -45,11 +45,13 @@ Maintain `// PYRS: P` comments (using P's dot-delimited identifier) on code and 
 
 These comments help `::review::` trace code back to its governing pyramid.
 
+**Exception:** if P (or any of its ancestors) has a Constraint prohibiting code markers, skip provenance comments entirely. This exception is inherited — a parent's opt-out applies to all its descendants, but does not affect other branches. This is common for meta pyramid repos where the codebase is not owned by the pyramid author.
+
 ## Audit Awareness
 
 After tightening, your code will be audited against the updated P. Auditors will check:
 - That every contract in the updated P is upheld
 - That code removed or changed reflects the pyramid's revisions
 - That no scope creep was introduced during tightening
-- That `PYRS_TODO` placeholders are accurate for the current state of children and See Also dependencies
-- That `PYRS` provenance comments are present and accurate
+- That `PYRS_TODO` placeholders are accurate for the current state of children and See Also dependencies (unless P's Constraints prohibit code markers)
+- That `PYRS` provenance comments are present and accurate (unless P's Constraints prohibit code markers)
