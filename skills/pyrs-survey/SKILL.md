@@ -19,7 +19,7 @@ This skill is activated when the user issues `::survey P::` where P is a pyramid
    - **Missing leaves** — concepts, contracts, or behaviors described in a pyramid that imply a child pyramid should exist but doesn't
    - **Under-specified pyramids** — pyramids with many concepts or contracts that would benefit from decomposition into children
    - **Cross-cutting concerns** — similar concepts appearing in multiple pyramids that might warrant their own shared pyramid
-   - **Stale `PRYS_TODO` placeholders** — search the codebase for `PRYS_TODO` references to pyramids that don't exist yet
+   - **Stale `PYRS_TODO` placeholders** — search the codebase for `PYRS_TODO` references to pyramids that don't exist yet
    - **Implied but unnamed concepts** — behaviors referenced in Constraints or Contracts that aren't captured anywhere in the hierarchy
 6. **Present findings** — for each gap, explain:
    - What's missing and where you found the evidence

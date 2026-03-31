@@ -16,7 +16,7 @@ Use this when a pyramid has been revised and the existing implementation needs t
 1. **Resolve P** — resolve the dot-delimited identifier to its pyramid file (see Pyramid Identifiers in _foundation.md)
 2. **Read the updated pyramid P** — understand what changed in Purpose, Concepts, Contracts, Relationships, and Constraints
 3. **Read the existing code and tests** — understand what currently exists
-4. **Identify the delta** — what does the updated pyramid require that the current code doesn't satisfy? What does the current code do that the updated pyramid no longer describes?
+4. **Compare pyramid against code** — read the pyramid as a complete specification. Anything the pyramid describes that the code doesn't do is missing. Anything the code does that the pyramid doesn't describe is excess. Both are gaps to close.
 5. **Tighten using strict TDD red/green, incrementally:**
    - Pick one changed aspect
    - Write or update a test to reflect the **updated** pyramid's concept
@@ -35,10 +35,21 @@ Same strict scope rules as `::implement::`:
 - Do **NOT** add anything not explicitly in the updated P
 - Remove code that the updated pyramid no longer describes (it would fail audit as scope creep)
 
+## Provenance Comments
+
+Maintain `// PYRS: P` comments (using P's dot-delimited identifier) on code and tests touched during tightening. Use the comment syntax appropriate for the language (`#`, `//`, `/* */`, etc.).
+
+- Add provenance comments to any new code or tests written during tightening
+- Update identifiers if code moves between pyramids
+- Existing `PYRS` comments from prior `::implement::` runs should remain accurate
+
+These comments help `::review::` trace code back to its governing pyramid.
+
 ## Audit Awareness
 
 After tightening, your code will be audited against the updated P. Auditors will check:
 - That every contract in the updated P is upheld
 - That code removed or changed reflects the pyramid's revisions
 - That no scope creep was introduced during tightening
-- That `PRYS_TODO` placeholders are accurate for the current state of children and See Also dependencies
+- That `PYRS_TODO` placeholders are accurate for the current state of children and See Also dependencies
+- That `PYRS` provenance comments are present and accurate

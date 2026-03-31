@@ -21,6 +21,7 @@ Pyramid Workflow Commands
 ::review P::                    Compare code against the pyramid(s) it should mirror
 ::survey P::                    Analyze P's full lineage for structural gaps and missing leaves
 ::post-mortem P? [...description]::  Debug an "impossible" issue and patch the pyramid gap
+::bootstrap P? [...description]::    Produce pyramids from existing code (pyramid-first exception)
 
 ::ls::                          List the pyramid hierarchy as a tree
 ::ls describe::                 List with 1-sentence descriptions (alias: ::ls d::)

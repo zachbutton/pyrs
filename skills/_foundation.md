@@ -71,6 +71,8 @@ All changes begin in the pyramids, never in the code directly. The pyramid workf
 
 `::implement::` and `::tighten::` are the **only** routes to code changes. Code must never be modified outside of these commands. If a user describes a change without specifying a pyramid, the appropriate pyramid must be identified first — ask the user to confirm before modifying anything.
 
+**Exception: `::bootstrap::`** — when adopting pyrs on an existing project or capturing pyramids for code a human wrote, `::bootstrap::` reverses the flow: it reads code and produces pyramids. This is the only time code drives pyramid creation. Once bootstrap completes, the normal pyramid-first flow applies to all future changes.
+
 ## Strictness Rules
 
 These rules apply across ALL pyramid operations. Violations are audit failures.
@@ -80,4 +82,6 @@ These rules apply across ALL pyramid operations. Violations are audit failures.
 3. **Links are mandatory** — every pyramid must be referenced by its parent. Every pyramid must reference its parent. Orphans fail audits.
 4. **Audits are strict** — do not pass audits when there is drift, missing links, or scope violations. Surface every issue.
 5. **Probing over assuming** — when drift or ambiguity is found, ask the user rather than making assumptions about intent.
-6. **Placeholder format** — for unbuilt dependencies (children or See Also siblings): `// PRYS_TODO: ./pyramids/[path]` with meaningful runtime logging.
+6. **Placeholder format** — for unbuilt dependencies (children or See Also siblings): `// PYRS_TODO: ./pyramids/[path]` with meaningful runtime logging.
+7. **Provenance comments** — code and tests generated from a pyramid must include `// PYRS: <identifier>` comments (e.g., `// PYRS: event-bus.actions`) using the pyramid's dot-delimited identifier. Place these at the top of files, on key functions, classes, and test blocks so the connection between code and pyramid is obvious. Use the comment syntax appropriate for the language (`#`, `//`, `/* */`, etc.).
+8. **Git history is not a source of truth** — pyramid operations compare the current pyramid state against the current code state. Do not use `git log`, `git diff`, `git blame`, or any version control history to determine what a pyramid means, what changed, or what to implement. The pyramid file as it exists now is the complete specification.
