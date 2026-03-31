@@ -17,7 +17,7 @@ Determine from the user's description:
 1. **What the concept is** — its purpose and scope
 2. **Where it belongs in the hierarchy** — which parent pyramid owns it
 3. **What it relates to** — siblings, dependencies, existing concepts
-4. **Whether placeholders exist** — search the codebase for `PRYS_TODO` references to this concept
+4. **Whether placeholders exist** — search the codebase for `PYRS_TODO` references to this concept
 
 If placement is unclear from the description, **ask the user** probing questions. Do not guess.
 
@@ -54,4 +54,4 @@ Read sibling pyramids (other children of the same parent) and check whether any 
 
 ### Step 6: Update Code Placeholders
 
-If `PRYS_TODO` placeholders referencing this concept exist in the codebase, note them for the user. The placeholders should remain until `::implement::` is run for this pyramid, but the user should know they exist.
+If `PYRS_TODO` placeholders referencing this concept exist in the codebase, note them for the user. The placeholders should remain until `::implement::` is run for this pyramid, but the user should know they exist.

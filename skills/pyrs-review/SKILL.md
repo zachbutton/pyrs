@@ -19,7 +19,7 @@ This skill is activated when the user issues `::review P::` where P is a pyramid
    - Does the code implement behavior not described in the pyramid?
    - Does the pyramid describe contracts the code doesn't uphold?
    - Does the code imply relationships or dependencies not captured in the pyramid hierarchy?
-   - Are there `PRYS_TODO` placeholders that should have been resolved?
+   - Are there `PYRS_TODO` placeholders that should have been resolved?
 6. **Report findings** — when drift is found, **ask probing questions** about how to reconcile:
    - Update the code to match the pyramid?
    - Update the pyramid to match the code?
@@ -30,7 +30,7 @@ This skill is activated when the user issues `::review P::` where P is a pyramid
 - Code that does more than the pyramid describes (scope creep)
 - Code that doesn't fulfill a contract stated in the pyramid
 - Code with implicit concepts that have no pyramid representation
-- Stale `PRYS_TODO` placeholders for pyramids that now exist
+- Stale `PYRS_TODO` placeholders for pyramids that now exist
 - Code coupling that violates a pyramid's Constraints section
 
 Do not assume drift is acceptable. Surface every discrepancy and let the user decide.

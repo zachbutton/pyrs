@@ -38,10 +38,20 @@ These will be enforced by future audits and reviews. Violations are failures.
 
 When P references children or See Also siblings that are not yet built or complete:
 
-- Leave an explicit placeholder comment in the code: `// PRYS_TODO: ./pyramids/[pyramid file or directory]`
+- Leave an explicit placeholder comment in the code: `// PYRS_TODO: ./pyramids/[pyramid file or directory]`
 - Log the not-implemented behavior meaningfully at runtime so the developer can see it during execution
 - Do **NOT** implement the dependency's behavior — only leave the placeholder
 - This applies to both child pyramids and sibling concepts referenced via See Also in P's Relationships
+
+## Provenance Comments
+
+Mark generated code and tests with `// PYRS: P` comments (using P's dot-delimited identifier) so the pyramid-to-code mapping is clear. Use the comment syntax appropriate for the language (`#`, `//`, `/* */`, etc.).
+
+- Place a comment at the top of each file created for this pyramid
+- Mark key functions, classes, and test blocks that implement P's concepts
+- Use the full identifier (e.g., `// PYRS: event-bus.actions`), not file paths
+
+These comments help `::review::` trace code back to its governing pyramid and make audits easier.
 
 ## Audit Awareness
 
@@ -49,6 +59,7 @@ Your implementation will be audited against P. Auditors will check:
 - That every contract in P is upheld by your code
 - That your code does not exceed P's scope
 - That relationships and constraints are respected
-- That `PRYS_TODO` placeholders exist for unbuilt children and unbuilt See Also dependencies
+- That `PYRS_TODO` placeholders exist for unbuilt children and unbuilt See Also dependencies
+- That `PYRS` provenance comments are present and accurate
 
 Write code that cleanly maps to P's concepts. When an auditor reads P and then your code, the alignment should be obvious.
