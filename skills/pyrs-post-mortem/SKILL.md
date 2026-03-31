@@ -1,17 +1,26 @@
 ---
 name: pyrs-post-mortem
-description: "Investigate an issue that should have been impossible given the pyramids, debug it, and patch the relevant pyramid(s) to prevent recurrence. Triggered by ::post-mortem [description]::"
+description: "Investigate an issue that should have been impossible given the pyramids, debug it, and patch the relevant pyramid(s) to prevent recurrence. Triggered by ::post-mortem P? [description]:: where P optionally targets a specific pyramid."
 ---
 
 Before proceeding, read [_foundation.md](../_foundation.md) for the pyramid system rules.
 
 # Pyramid Post-Mortem
 
-This skill is activated when the user issues `::post-mortem [description]::` where the description explains a bug, failure, or unexpected behavior that *should not have been possible* given the contracts and constraints defined in the pyramids.
+This skill is activated when the user issues `::post-mortem P? [...description]::` where P is an optional pyramid identifier and the description explains a bug, failure, or unexpected behavior that *should not have been possible* given the contracts and constraints defined in the pyramids.
 
 If this issue happened, then the pyramids have a gap — a missing contract, an under-specified constraint, an unaccounted-for interaction, or a concept that was never captured.
 
 ## Procedure
+
+### Step 0: Resolve P (if omitted)
+
+If the user did not specify a pyramid identifier, do NOT guess. Instead:
+1. Read the user's description to understand what area of the system is affected
+2. Search `./pyramids/` for pyramids that likely govern that area
+3. Present the candidate pyramid(s) and ask the user to confirm which one(s) to investigate
+
+Do not proceed until the governing pyramid(s) are identified.
 
 ### Step 1: Understand the Issue
 
