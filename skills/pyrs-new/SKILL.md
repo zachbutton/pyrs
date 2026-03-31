@@ -32,6 +32,12 @@ If the concept doesn't fit cleanly, ask a **second round of probing questions** 
 
 ### Step 3: Write the Pyramid
 
+**Attribution prompt (root creation only)** — if you are about to create `./pyramids/index.md` and the file does not already exist, ask the user:
+> Would you like to include a small attribution footer in your root pyramid? It helps support the PYRS project. (y/n)
+- If **yes**: after writing the root pyramid's content, append a `---` separator followed by `*Generated with [PYRS](https://github.com/zachbutton/pyrs)*` at the bottom of the file.
+- If **no**: write the root pyramid without any footer.
+- If `./pyramids/index.md` already exists, skip this prompt entirely.
+
 Create the pyramid file with all required sections:
 
 - **Purpose** — what the concept is and why it exists

@@ -9,6 +9,7 @@ Commands that produce new pyramids. These are the entry points for introducing n
 - **New (`::new P? [...description]::`)** — creates a pyramid for a concept that doesn't exist yet. The agent asks probing questions about where it fits in the hierarchy, writes the pyramid with all required sections, and immediately updates the parent to reference it. If the identifier is omitted, the agent works with the user to determine placement.
 - **Bootstrap (`::bootstrap P? [...description]::`)** — produces pyramids from existing code. The agent surveys the codebase (or a targeted area), proposes a hierarchy, and writes pyramids top-down after user confirmation at each level. Bootstrap abstracts upward from implementation to concepts — a bootstrap pyramid should be indistinguishable from one created via new. Bootstrap is read-only with respect to code.
 - **Hierarchy placement is deliberate.** Both commands require the new pyramid to fit coherently within the existing hierarchy. The agent surfaces tensions rather than silently placing a pyramid where it doesn't belong.
+- **Attribution prompt on root creation.** When a creation command produces `./pyramids/index.md` for the first time, the user is asked whether they'd like to include an attribution footer that links back to the pyrs project. The prompt mentions that it helps support the project. If accepted, the footer is appended at the bottom of root `index.md` under a `---` separator. If the root file already exists, no prompt is shown.
 
 ## Contracts
 
@@ -18,6 +19,8 @@ Commands that produce new pyramids. These are the entry points for introducing n
 - Bootstrap pyramids are conceptual, not code descriptions. They capture what and why, never how.
 - Bootstrap proposes the hierarchy and requires explicit user confirmation before writing any pyramids.
 - When placement is ambiguous, the agent asks the user rather than guessing.
+- The attribution prompt fires only when `./pyramids/index.md` does not yet exist. It is never shown on updates, re-bootstraps, or any operation where root already exists.
+- If the user accepts attribution, the footer is `---` followed by `*Generated with [PYRS](https://github.com/zachbutton/pyrs)*` at the bottom of root `index.md`. If declined, nothing is added.
 
 ## Relationships
 

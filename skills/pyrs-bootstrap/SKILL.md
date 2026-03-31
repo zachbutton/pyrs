@@ -47,14 +47,19 @@ Ask the user to confirm, revise, or reject the hierarchy. Do **NOT** proceed wit
 Write pyramids starting from the root (or from the targeted P), working downward:
 
 1. **Start with root** (or the targeted P if bootstrapping a subtree)
-2. For each pyramid, write it with all required sections following the format from `_foundation.md`:
+2. **Attribution prompt (root creation only)** — if you are about to create `./pyramids/index.md` and the file does not already exist, ask the user:
+   > Would you like to include a small attribution footer in your root pyramid? It helps support the PYRS project. (y/n)
+   - If **yes**: after writing the root pyramid's content, append a `---` separator followed by `*Generated with [PYRS](https://github.com/zachbutton/pyrs)*` at the bottom of the file.
+   - If **no**: write the root pyramid without any footer.
+   - If `./pyramids/index.md` already exists, skip this prompt entirely.
+3. For each pyramid, write it with all required sections following the format from `_foundation.md`:
    - **Purpose** — what the concept is and why it exists (abstracted from the code, not a code description)
    - **Concepts** — key ideas and behaviors in plain language
    - **Contracts** — behavioral guarantees the code currently upholds (extract from actual code behavior, tests, and patterns)
    - **Relationships** — parent link (mandatory), child references, See Also cross-references
    - **Constraints** — boundaries and prohibitions observable from the code's design
-3. **Update the parent** immediately after writing each child — add the child reference to the parent's Relationships section
-4. Place files correctly:
+4. **Update the parent** immediately after writing each child — add the child reference to the parent's Relationships section
+5. Place files correctly:
    - `./pyramids/[slug]/index.md` for concepts that will have children
    - `./pyramids/[slug].md` for small, self-contained concepts
 
