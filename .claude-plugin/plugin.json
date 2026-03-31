@@ -1,7 +1,7 @@
 {
 	"name": "pyrs",
 	"description": "Your context engineering doesn't survive the session. Pyrs gives AI agents persistent architectural contracts that do.",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"author": {
 		"name": "Zach Button"
 	}

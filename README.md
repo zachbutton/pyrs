@@ -338,6 +338,15 @@ If your projects live in `~/code/*`, you can make `~/code/` itself a private rep
 
 This is especially useful at work when your company doesn't use PYRS. Your agents still get durable context across sessions, and as a side effect, `./pyramids/` accumulates tribal knowledge: how systems connect, why things are the way they are, what the gotchas are. That knowledge lives in portable markdown files you can share with your team anytime.
 
+Since you likely don't want `// PYRS:` provenance comments and `// PYRS_TODO:` placeholders showing up in codebases your coworkers maintain, add a constraint to your pyramids:
+
+```markdown
+### Constraints
+- No PYRS code markers in generated code
+```
+
+The skills will respect this and omit all inline markers for that pyramid.
+
 ## Source Control
 
 The `./pyramids/` directory should be committed to version control alongside your code. Pyramid changes are changes — treat them like any other commit. The recommended convention is to use a `docs:` prefix for pyramid-only changes (e.g., `docs: add task-queue.retry pyramid`). The same applies to meta pyramid repos: commit pyramids alongside whatever they describe.

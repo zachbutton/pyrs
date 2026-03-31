@@ -32,5 +32,6 @@ This skill is activated when the user issues `::review P::` where P is a pyramid
 - Code with implicit concepts that have no pyramid representation
 - Stale `PYRS_TODO` placeholders for pyramids that now exist
 - Code coupling that violates a pyramid's Constraints section
+- Missing or inaccurate `PYRS` provenance comments — unless the governing pyramid (or any of its ancestors) has a Constraint prohibiting code markers, in which case provenance comments are not expected for that branch
 
 Do not assume drift is acceptable. Surface every discrepancy and let the user decide.

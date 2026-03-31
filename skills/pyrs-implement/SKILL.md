@@ -42,6 +42,7 @@ When P references children or See Also siblings that are not yet built or comple
 - Log the not-implemented behavior meaningfully at runtime so the developer can see it during execution
 - Do **NOT** implement the dependency's behavior — only leave the placeholder
 - This applies to both child pyramids and sibling concepts referenced via See Also in P's Relationships
+- **Exception:** if P (or any of its ancestors) has a Constraint prohibiting code markers, do not insert `PYRS_TODO` placeholders — instead, note unbuilt dependencies in the pyramid itself
 
 ## Provenance Comments
 
@@ -53,13 +54,15 @@ Mark generated code and tests with `// PYRS: P` comments (using P's dot-delimite
 
 These comments help `::review::` trace code back to its governing pyramid and make audits easier.
 
+**Exception:** if P (or any of its ancestors) has a Constraint prohibiting code markers, skip provenance comments entirely. This exception is inherited — a parent's opt-out applies to all its descendants, but does not affect other branches. This is common for meta pyramid repos where the codebase is not owned by the pyramid author.
+
 ## Audit Awareness
 
 Your implementation will be audited against P. Auditors will check:
 - That every contract in P is upheld by your code
 - That your code does not exceed P's scope
 - That relationships and constraints are respected
-- That `PYRS_TODO` placeholders exist for unbuilt children and unbuilt See Also dependencies
-- That `PYRS` provenance comments are present and accurate
+- That `PYRS_TODO` placeholders exist for unbuilt children and unbuilt See Also dependencies (unless P's Constraints prohibit code markers)
+- That `PYRS` provenance comments are present and accurate (unless P's Constraints prohibit code markers)
 
 Write code that cleanly maps to P's concepts. When an auditor reads P and then your code, the alignment should be obvious.
