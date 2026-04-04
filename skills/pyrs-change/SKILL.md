@@ -1,9 +1,9 @@
 ---
 name: pyrs-change
-description: "Intercepts when a user describes a code change, feature, or bug fix without using a :: command. Guides them into the pyramid workflow instead of modifying code directly."
+description: "Invoke pyrs-foundation first. Intercepts when a user describes a code change, feature, or bug fix without using a :: command. Guides them into the pyramid workflow instead of modifying code directly."
 ---
 
-Before proceeding, read [_foundation.md](../_foundation.md) for the pyramid system rules — especially the Change Flow section.
+Before proceeding, invoke the pyrs-foundation skill to load the pyramid system rules — especially the Change Flow section.
 
 # Pyramid Change Interceptor
 
@@ -23,13 +23,13 @@ Determine which pyramid governs the area the user is describing:
 - Search `./pyramids/` for the relevant concept
 - If multiple pyramids could apply, narrow it down
 
-If no matching pyramid exists, tell the user and suggest `::new::`.
+If no matching pyramid exists, tell the user and suggest `::spec`.
 
 ### Step 2: Confirm with the User
 
 Present your finding:
 - Which pyramid you identified as the right place for this change
-- Whether this is a new concept (`::new::`) or a revision to an existing one (`::update::`)
+- Whether this is a new concept or a revision to an existing one — either way, `::spec` handles both
 - Ask the user to confirm before proceeding
 
 Do **NOT** skip confirmation. Do **NOT** modify any pyramid or code without the user's agreement.
@@ -38,8 +38,9 @@ Do **NOT** skip confirmation. Do **NOT** modify any pyramid or code without the 
 
 Once confirmed, guide the user to the appropriate command:
 
-- **New concept** → `::new [description]::`
-- **Change to existing pyramid** → `::update P [description]::`
-- **Then implement** → `::implement P::` or `::tighten P::` after the pyramid is written/updated
+- **New or revised pyramid** → `::spec P? [description]` where `P` is an optional `@`-prefixed pyramid reference
+- **Then apply to code** → `::apply P` after the pyramid is written/updated, using an `@`-prefixed pyramid reference
 
-Remind the user that `::implement::` and `::tighten::` are the only routes to code changes.
+If the target already has a sibling `diff.md`, the mutation command should run a same-target diff refresh before final output so unresolved-gap sidecars stay current.
+
+Remind the user that `::apply` is the only route to code changes.
