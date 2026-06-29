@@ -7,7 +7,7 @@ Before proceeding, invoke the pyrs-foundation skill to load the pyramid system r
 
 # Pyramid Scan
 
-This skill is activated when the user issues `::scan P` where P is an `@`-prefixed pyramid reference (e.g., `::scan @task-queue` or `::scan @./pyramids/task-queue/index.md`).
+This skill is activated when the user issues `::scan P` where P is an `@`-prefixed pyramid reference (e.g., `::scan @.task-queue` or `::scan @./pyramids/task-queue/index.md`).
 
 ## Procedure
 

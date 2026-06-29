@@ -66,7 +66,7 @@ Once confirmed:
 - For each patched target pyramid `P`, if sibling `diff.md` exists before or after the mutation, run a same-target `::diff P` refresh before final output
   - Keep refresh strictly target-scoped
   - Do **NOT** run a broad diff sweep unless the user explicitly requested that scope
-- After pyramid changes are in place, tell the user that starting a new session and running `::apply @target` is the recommended path to ensure the patched pyramids produce correct code
+- After pyramid changes are in place, tell the user that starting a new session and running `::apply @.target` is the recommended path to ensure the patched pyramids produce correct code
 - Explicitly declare: `I will NOT initiate any code changes in this session.`
 - If the user explicitly issues `::apply` in the same session anyway, allow that user-initiated action and proceed via the apply workflow
 

@@ -7,7 +7,7 @@ Before proceeding, invoke the pyrs-foundation skill to load the pyramid system r
 
 # Pyramid Ingest
 
-This skill is activated when the user issues `::ingest`, `::ingest P`, or `::ingest P description` where P is an `@`-prefixed pyramid reference and the description guides what to focus on (e.g., `::ingest @auth — focus on the OAuth2 and session management flows`).
+This skill is activated when the user issues `::ingest`, `::ingest P`, or `::ingest P description` where P is an `@`-prefixed pyramid reference and the description guides what to focus on (e.g., `::ingest @.auth — focus on the OAuth2 and session management flows`).
 
 Ingest reverses the pyramid-first rule. It produces pyramids FROM existing code. Use it when:
 - Adopting pyrs on an existing or legacy project
@@ -84,8 +84,8 @@ If some pyramids already existed before ingest:
 
 After all pyramids are written, suggest the user run:
 - `::ls describe` to see the full hierarchy
-- `::sane @root` to verify structural integrity
-- `::diff @target` on key areas to verify code-pyramid alignment
+- `::sane @.root` to verify structural integrity
+- `::diff @.target` on key areas to verify code-pyramid alignment
 
 ### Step 8: Post-Ingest Diff Refresh
 
@@ -101,7 +101,7 @@ If yes, run a same-target `::diff P` refresh before final output.
 ### Step 9: Post-Ingest Handoff Notice
 
 After ingest successfully creates or revises pyramids:
-- Tell the user that starting a new session and running `::apply @target` is the recommended path to ensure the pyramid changes produce correct code
+- Tell the user that starting a new session and running `::apply @.target` is the recommended path to ensure the pyramid changes produce correct code
 - Explicitly declare: `I will NOT initiate any code changes in this session.`
 - If the user explicitly issues `::apply` in the same session anyway, allow that user-initiated action and proceed via the apply workflow
 

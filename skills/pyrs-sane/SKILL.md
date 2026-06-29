@@ -7,7 +7,7 @@ Before proceeding, invoke the pyrs-foundation skill to load the pyramid system r
 
 # Pyramid Sane
 
-This skill is activated when the user issues `::sane P` where P is an `@`-prefixed pyramid reference (e.g., `::sane @event-bus` or `::sane @./pyramids/event-bus/index.md`).
+This skill is activated when the user issues `::sane P` where P is an `@`-prefixed pyramid reference (e.g., `::sane @.event-bus` or `::sane @./pyramids/event-bus/index.md`).
 
 ## Procedure
 
@@ -37,7 +37,7 @@ Audits must be strict. The following are all failures — do not silently pass t
 - **Conceptual misalignment** — P describes behavior that contradicts or drifts from what its parent says P should be
 - **Missing sections** — a pyramid is missing any of the required sections (Purpose, Concepts, Contracts, Relationships, Constraints)
 - **Scope violations** — P describes behavior that belongs to a parent or sibling pyramid
-- **Missing or inaccurate provenance comments** — code governed by P lacks `// PYRS: <identifier>` comments, or comments reference the wrong pyramid (for example, `// PYRS: @event-bus.actions`). Exception: if P (or any of its ancestors) has a Constraint prohibiting code markers, provenance comments are not required for P or its descendants — but all other pyramids and branches still require them.
+- **Missing or inaccurate provenance comments** — code governed by P lacks `// PYRS: <identifier>` comments, or comments reference the wrong pyramid (for example, `// PYRS: @.event-bus.actions`). Exception: if P (or any of its ancestors) has a Constraint prohibiting code markers, provenance comments are not required for P or its descendants — but all other pyramids and branches still require them.
 - **Missing or stale placeholders** — unbuilt dependencies lack `// PYRS_TODO` placeholders, or placeholders exist for dependencies that have since been built. Same code-marker exception as above applies.
 
 Do not infer or assume alignment. If something is ambiguous, flag it and ask.

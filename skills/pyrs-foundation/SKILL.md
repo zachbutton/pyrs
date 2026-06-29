@@ -23,17 +23,17 @@ A project using the pyramid workflow has a `./pyramids/` directory containing `.
 Pyramids can be referenced anywhere using **`@`-prefixed pyramid references**. References can be written in either form:
 
 - **Identifier form:**
-  - `@event-bus` → `./pyramids/event-bus/index.md`
-  - `@event-bus.actions` → `./pyramids/event-bus/actions/index.md`
-  - `@root` → `./pyramids/index.md`
-  - `@root.event-bus.actions` → same as `@event-bus.actions`
+  - `@.event-bus` → `./pyramids/event-bus/index.md`
+  - `@.event-bus.actions` → `./pyramids/event-bus/actions/index.md`
+  - `@` → `./pyramids/index.md`
+  - `@.event-bus.actions` → same as `@.event-bus.actions`
 - **Direct-link form:**
   - `@./pyramids/event-bus/index.md`
   - `@./pyramids/event-bus/actions/index.md`
 
-In identifier form, `root` refers to `./pyramids/index.md` and is **optional** as a prefix — `@root.event-bus.actions` and `@event-bus.actions` mean the same thing. Use `@root` explicitly only when you need to reference `./pyramids/index.md` itself.
+Use `@` when you need to reference `./pyramids/index.md` itself.
 
-These references are used in commands (`::sane @event-bus.actions`), in See Also references, and anywhere a pyramid needs to be referenced by name.
+These references are used in commands (`::sane @.event-bus.actions`), in See Also references, and anywhere a pyramid needs to be referenced by name.
 
 ## Content Rules
 
@@ -42,6 +42,7 @@ These references are used in commands (`::sane @event-bus.actions`), in See Also
 - Real code does NOT need to match example code; it only needs to match the **concept**
 - If a concept can be explained without code, prefer that
 - Parents constrain children, and children are more specific. Children further decompose parents into more granular concepts. Thus, child concepts must NEVER be copied upward to the parents, unless the concept belongs with the parent in the first place, in which it should not be in the child. Correct compartmentalization and decomposition will be audited.
+- Concepts and Constraints must NOT be repetitions of each other. Instead, you must state each point once in the correct locations, either Concept, Contract, OR Constraint. Each section should be meaningful, not repetitive.
 
 ## Pyramid File Sections
 
@@ -62,7 +63,7 @@ Explicit links to parent and child pyramids. Every pyramid **must** link to its 
 Format:
 - Parent: `[Parent Name](../index.md)`
 - Children: `[Child Name](./child-slug/index.md)`
-- See Also: `[Label](../sibling/path/index.md)` — cross-references to related pyramids that are not parent/child. Use `@` pyramid references (e.g., `@event-bus.actions` or `@./pyramids/event-bus/actions/index.md`) to reference them.
+- See Also: `[Label](../sibling/path/index.md)` — cross-references to related pyramids that are not parent/child. Use `@` pyramid references (e.g., `@.event-bus.actions` or `@./pyramids/event-bus/actions/index.md`) to reference them.
 
 ### Constraints
 Boundaries and prohibitions — what this concept must NOT do or become. These guard against scope creep during implementation and audit.
@@ -96,6 +97,6 @@ These rules apply across ALL pyramid operations. Violations are audit failures.
 4. **Audits are strict** — do not pass audits when there is drift, missing links, or scope violations. Surface every issue.
 5. **Probing over assuming** — when drift or ambiguity is found, ask the user rather than making assumptions about intent.
 6. **Placeholder format** — for unbuilt dependencies (children or See Also siblings): `// PYRS_TODO: ./pyramids/[path]` with meaningful runtime logging. **Exception:** if the pyramid (or any of its ancestors) has a Constraint prohibiting code markers, do not insert placeholders — instead, note unbuilt dependencies in the pyramid itself. This exception is inherited: a parent's opt-out applies to all its descendants, but does not affect other branches of the hierarchy.
-7. **Provenance comments** — code and tests generated from a pyramid must include `// PYRS: <identifier>` comments (e.g., `// PYRS: @event-bus.actions`) using the pyramid's identifier-form `@` reference. Place these at the top of files, on key functions, classes, and test blocks so the connection between code and pyramid is obvious. Use the comment syntax appropriate for the language (`#`, `//`, `/* */`, etc.). Missing or inaccurate provenance comments are audit failures. **Exception:** if the pyramid (or any of its ancestors) has a Constraint prohibiting code markers, omit provenance comments entirely. This exception is inherited: a parent's opt-out applies to all its descendants, but does not affect other branches of the hierarchy. **Rule**: Each source code file is can pertain to one and ONLY ONE pyramid: There shall be no mixed provenance in any file.
+7. **Provenance comments** — code and tests generated from a pyramid must include `// PYRS: <identifier>` comments (e.g., `// PYRS: @.event-bus.actions`) using the pyramid's identifier-form `@` reference. Place these at the top of files, on key functions, classes, and test blocks so the connection between code and pyramid is obvious. Use the comment syntax appropriate for the language (`#`, `//`, `/* */`, etc.). Missing or inaccurate provenance comments are audit failures. **Exception:** if the pyramid (or any of its ancestors) has a Constraint prohibiting code markers, omit provenance comments entirely. This exception is inherited: a parent's opt-out applies to all its descendants, but does not affect other branches of the hierarchy. **Rule**: Each source code file is can pertain to one and ONLY ONE pyramid: There shall be no mixed provenance in any file.
 8. **Git history is not a source of truth** — pyramid operations compare the current pyramid state against the current code state. Do not use `git log`, `git diff`, `git blame`, or any version control history to determine what a pyramid means, what changed, or what to implement. The pyramid file as it exists now is the complete specification.
 9. **Treat diff sidecars as derived output** — `diff.md` files are report artifacts from `::diff`. Commands that traverse the hierarchy must treat `index.md` files as the only pyramid definitions, while optionally surfacing `diff.md` presence when relevant (for example, in `::ls`). A present sidecar means unresolved work remains; no-drift state is represented by sidecar absence.

@@ -7,7 +7,7 @@ Before proceeding, invoke the pyrs-foundation skill to load the pyramid system r
 
 # Pyramid Diff
 
-This skill is activated when the user issues `::diff P` where P is an `@`-prefixed pyramid reference or code reference (e.g., `::diff @event-bus`, `::diff @./pyramids/event-bus/index.md`, or `::diff src/event-bus/`). The same behavior also applies when another command performs an explicit same-target post-mutation diff refresh.
+This skill is activated when the user issues `::diff P` where P is an `@`-prefixed pyramid reference or code reference (e.g., `::diff @.event-bus`, `::diff @./pyramids/event-bus/index.md`, or `::diff src/event-bus/`). The same behavior also applies when another command performs an explicit same-target post-mutation diff refresh.
 
 ## Procedure
 

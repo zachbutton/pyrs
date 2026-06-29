@@ -93,7 +93,7 @@ From within Claude Code:
 
 ```
 /plugin marketplace add zachbutton/pyrs
-/plugin install pyrs@zachbutton-pyrs
+/plugin install pyrs@.zachbutton-pyrs
 ```
 
 ### OpenCode
@@ -191,17 +191,16 @@ Pyramids may include abstract code snippets to illustrate a concept, but these a
 Commands reference pyramids using `@`-prefixed pyramid references:
 
 - Identifier form:
-  - `@event-bus` → `./pyramids/event-bus/index.md`
-  - `@event-bus.actions` → `./pyramids/event-bus/actions/index.md`
-  - `@root` → `./pyramids/index.md` — use this when you want to target the top-level pyramid itself (e.g., `::sane @root`)
-  - `root` is optional inside identifier form — `@root.event-bus.actions` and `@event-bus.actions` resolve to the same pyramid
+  - `@.event-bus` → `./pyramids/event-bus/index.md`
+  - `@.event-bus.actions` → `./pyramids/event-bus/actions/index.md`
+  - `@` → `./pyramids/index.md` — use this when you want to target the top-level pyramid itself (e.g., `::sane @`)
 - Direct-link form:
   - `@./pyramids/event-bus/index.md`
   - `@./pyramids/event-bus/actions/index.md`
 
 ### Commands
 
-Commands are issued in conversation using `::command context` syntax (two colons only at the start). Each command loads a specific strategy; the agent handles the rest. `P` is an `@`-prefixed pyramid reference (e.g., `@task-queue.retry` or `@./pyramids/task-queue/retry/index.md`). `P?` means the reference is optional.
+Commands are issued in conversation using `::command context` syntax (two colons only at the start). Each command loads a specific strategy; the agent handles the rest. `P` is an `@`-prefixed pyramid reference (e.g., `@.task-queue.retry` or `@./pyramids/task-queue/retry/index.md`). `P?` means the reference is optional.
 
 | Command | What it does |
 |---------|-------------|
@@ -251,7 +250,7 @@ Here's how the pyramid workflow plays out across a real project. Each step below
 **Session 1** — Define the concept
 
 ```
-::spec @task-queue a task queue that processes background jobs
+::spec @.task-queue a task queue that processes background jobs
 ```
 
 The agent asks where this fits in the hierarchy, you discuss scope and contracts, and it writes the pyramid.
@@ -263,7 +262,7 @@ The agent asks where this fits in the hierarchy, you discuss scope and contracts
 **Session 2** — Build it *(fresh context)*
 
 ```
-::apply @task-queue
+::apply @.task-queue
 ```
 
 The agent reads `task-queue/index.md`. That's all it needs. It builds the implementation via incremental TDD. Child concepts referenced but not yet defined get `// PYRS_TODO` placeholders with runtime logging.
@@ -273,7 +272,7 @@ The agent reads `task-queue/index.md`. That's all it needs. It builds the implem
 **Session 3** — Decompose further *(fresh context)*
 
 ```
-::spec @task-queue.retry retry logic with exponential backoff
+::spec @.task-queue.retry retry logic with exponential backoff
 ```
 
 The agent creates `./pyramids/task-queue/retry/index.md` as a child pyramid and updates the parent to reference it.
@@ -283,7 +282,7 @@ The agent creates `./pyramids/task-queue/retry/index.md` as a child pyramid and 
 **Session 4** — Build the child *(fresh context)*
 
 ```
-::apply @task-queue.retry
+::apply @.task-queue.retry
 ```
 
 The agent reads `retry/index.md`, implements via TDD, and replaces the `PYRS_TODO` placeholder left in Session 2.
@@ -293,13 +292,13 @@ The agent reads `retry/index.md`, implements via TDD, and replaces the `PYRS_TOD
 **Session 5** — Revise and apply *(fresh context)*
 
 ```
-::spec @task-queue dead-letter support after max retries
+::spec @.task-queue dead-letter support after max retries
 ```
 
 The agent revises `task-queue/index.md`. It surfaces that this impacts `retry/index.md` and asks how to reconcile before making changes.
 
 ```
-::apply @task-queue
+::apply @.task-queue
 ```
 
 Updates existing task-queue code to conform to the revised pyramid via TDD.
@@ -309,13 +308,13 @@ Updates existing task-queue code to conform to the revised pyramid via TDD.
 **Later** — Maintenance *(fresh context)*
 
 ```
-::diff @task-queue
+::diff @.task-queue
 ```
 
 Catches drift between code and pyramids and writes a report to `./pyramids/task-queue/diff.md`.
 
 ```
-::sane @task-queue
+::sane @.task-queue
 ```
 
 Verifies conceptual alignment up the hierarchy.
@@ -339,13 +338,13 @@ The agent surveys your codebase, proposes a pyramid hierarchy, and, after your c
 You can also ingest a specific area:
 
 ```
-::ingest @auth — focus on session handling and OAuth
+::ingest @.auth — focus on session handling and OAuth
 ```
 
 Or use it after writing code manually, or to re-ingest code that has evolved. Ingest captures the concept so the pyramid artifact exists for future agents:
 
 ```
-::ingest @task-queue.retry
+::ingest @.task-queue.retry
 ```
 
 ## Adoption Strategies

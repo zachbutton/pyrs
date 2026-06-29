@@ -7,7 +7,7 @@ Before proceeding, invoke the pyrs-foundation skill to load the pyramid system r
 
 # Pyramid Spec
 
-This skill is activated when the user issues `::spec P? [...description]` where P is an optional `@`-prefixed pyramid reference (identifier form like `@event-bus` or direct-link form like `@./pyramids/event-bus/index.md`) and the description explains the new concept or what needs to change (e.g., `::spec @event-bus — a centralized pub/sub messaging layer` or `::spec @event-bus — channels should support priority ordering`).
+This skill is activated when the user issues `::spec P? [...description]` where P is an optional `@`-prefixed pyramid reference (identifier form like `@.event-bus` or direct-link form like `@./pyramids/event-bus/index.md`) and the description explains the new concept or what needs to change (e.g., `::spec @.event-bus — a centralized pub/sub messaging layer` or `::spec @.event-bus — channels should support priority ordering`).
 
 Spec is the single command for all pyramid authorship — whether introducing a concept that doesn't exist yet or updating one as requirements and understanding change.
 
@@ -58,7 +58,7 @@ Create the pyramid file with all required sections:
 - **Purpose** — what the concept is and why it exists
 - **Concepts** — key ideas and behaviors
 - **Contracts** — behavioral guarantees and invariants
-- **Relationships** — explicit link to parent; links to children if any are known; **See Also** cross-references if the user specifies them (`@` references like `@event-bus.actions` or `@./pyramids/event-bus/actions/index.md` resolve to pyramid paths)
+- **Relationships** — explicit link to parent; links to children if any are known; **See Also** cross-references if the user specifies them (`@` references like `@.event-bus.actions` or `@./pyramids/event-bus/actions/index.md` resolve to pyramid paths)
 - **Constraints** — boundaries and prohibitions
 
 Place the file at:
@@ -112,7 +112,7 @@ Update the pyramid file, preserving all required sections:
 - **Purpose** — revise if the concept's intent has shifted
 - **Concepts** — add, remove, or modify as described
 - **Contracts** — update behavioral guarantees; flag any that are being removed or weakened
-- **Relationships** — update if children are being added, removed, or restructured. Add, update, or remove **See Also** cross-references as needed (`@` references like `@event-bus.actions` or `@./pyramids/event-bus/actions/index.md` resolve to pyramid paths)
+- **Relationships** — update if children are being added, removed, or restructured. Add, update, or remove **See Also** cross-references as needed (`@` references like `@.event-bus.actions` or `@./pyramids/event-bus/actions/index.md` resolve to pyramid paths)
 - **Constraints** — update boundaries as needed
 
 ### Step 5: Flag Downstream Effects
@@ -138,6 +138,6 @@ If yes, run a same-target `::diff P` refresh before final output.
 ### Step 7: Post-Spec Handoff Notice
 
 After any successful spec change:
-- Tell the user that starting a new session and running `::apply @target` is the recommended path to ensure the updated pyramid produces correct code
+- Tell the user that starting a new session and running `::apply @.target` is the recommended path to ensure the updated pyramid produces correct code
 - Explicitly declare: `I will NOT initiate any code changes in this session.`
 - If the user explicitly issues `::apply` in the same session anyway, allow that user-initiated action and proceed via the apply workflow

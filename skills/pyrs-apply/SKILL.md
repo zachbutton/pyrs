@@ -7,7 +7,7 @@ Before proceeding, invoke the pyrs-foundation skill to load the pyramid system r
 
 # Pyramid Apply
 
-This skill is activated when the user issues `::apply P` where P is an `@`-prefixed pyramid reference (e.g., `::apply @event-bus` or `::apply @./pyramids/event-bus/index.md`).
+This skill is activated when the user issues `::apply P` where P is an `@`-prefixed pyramid reference (e.g., `::apply @.event-bus` or `::apply @./pyramids/event-bus/index.md`).
 
 Apply is the only route from concept to code — it handles both building from scratch and updating existing code to match a revised pyramid.
 
@@ -84,7 +84,7 @@ Mark generated code and tests with `// PYRS: P` comments (using P's identifier-f
 
 - Place a comment at the top of each file created for this pyramid
 - Mark key functions, classes, and test blocks that implement P's concepts
-- Use the full identifier-form reference (e.g., `// PYRS: @event-bus.actions`), not file paths
+- Use the full identifier-form reference (e.g., `// PYRS: @.event-bus.actions`), not file paths
 - When tightening, update identifiers if code moves between pyramids
 - Existing `PYRS` comments from prior runs should remain accurate
 
