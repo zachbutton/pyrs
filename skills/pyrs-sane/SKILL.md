@@ -18,6 +18,7 @@ This skill is activated when the user issues `::sane P` where P is an `@`-prefix
 5. **Check for conceptual drift** between P and its parents:
    - Does P's purpose still align with how the parent describes it?
    - Do P's contracts contradict or duplicate parent or sibling contracts?
+     - Parents which re-state child concepts must be considered insane
    - Are all child references in parents present and accurate?
    - Are there orphan pyramids (missing parent links)?
    - Do constraints conflict across levels?

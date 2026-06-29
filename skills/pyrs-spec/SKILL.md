@@ -47,6 +47,7 @@ Read the draft pyramid's **parent pyramid(s)** to assess how the new concept fit
 - Does it belong under this parent, or would it fit better elsewhere?
 - Does it overlap with existing siblings?
 - Does it conflict with the parent's constraints?
+- Does the parent express similar concepts? If so, we should remove the decomposed child concepts from the parent, or else re-structure the whole related concept hierarchy for best fit.
 
 If the concept doesn't fit cleanly, ask a **second round of probing questions** before proceeding. Getting hierarchy placement wrong will cause audit failures later.
 
